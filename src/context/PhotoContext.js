@@ -9,10 +9,15 @@ const PhotoContextProvider = props => {
   const runSearch = query => {
     axios
       .get(
-        `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`
+        //`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`
+      `https://api.thecatapi.com/v1/images/search?limit=12&page=0&mime_types=${query}`,{
+            headers: {
+              'x-api-key': '41f765a8-7bdb-470b-a9e9-914885a69efb'
+            }
+          }
       )
       .then(response => {
-        setImages(response.data.photos.photo);
+        setImages(response.data);
         setLoading(false);
       })
       .catch(error => {
